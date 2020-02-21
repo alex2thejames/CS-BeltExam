@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .a1 {
+            height: 30px;
+            width: 75px;
+            text-align: center;
+            line-height: 27px;
+            float: right;
+            border-radius: 8px;
+            background: yellow;
+            color: black;
+            text-decoration: none;
+            font-weight: 500;
+            border: 2px solid black;
+            margin-right: 30px;
+            margin-top: 10px;
+        }
+        .a2 {
+            height: 30px;
+            width: 150px;
+            text-align: center;
+            line-height: 27px;
+            float: right;
+            border-radius: 8px;
+            background: blue;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border: 2px solid black;
+            margin-right:30px;
+            margin-top: 10px;
+        }
+        a {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="a1" href="/logout">Log out</a>
+        <p class="a2">Welcome, @ViewBag.Name.Name</p>
+        <h1>Dojo Activity Center</h1>
+        <table class="table">
+            <tr>
+                <th>Activity</th>
+                <th>Date and Time</th>
+                <th>Duration</th>
+                <th>Event Coordinator</th>
+                <th>No. of Participants</th>
+                <th>Action</th>
+            </tr>
+            @foreach(var i in @ViewBag.Plans)
+            {
+                bool userFound = false;
+                <tr>
+                    <td><a href="/display/@i.PlanId">@i.Title</a></td>
+                    <td>@i.Date.ToString("MM/dd") @@ @i.Time.ToString("hh:mm tt")</td>
+                    <td>@i.Duration @i.DType</td>
+                    <td>@i.CreatedByName</td>
+                    <td>@i.Goings.Count</td>
+                    @if(@i.CreatedBy == @ViewBag.CurrUser)
+                    {
+                        userFound = true;
+                        <td><a href="/delete/@i.PlanId">Delete</a></td>
+                    }
+                    @foreach(var j in @ViewBag.goingList)
+                    {
+                        @if(j.PlanId == i.PlanId)                     
+                        {
+                            @if(j.UserId == @ViewBag.CurrUser)
+                            {
+                                userFound = true;
+                                @if(@i.CreatedBy != @ViewBag.CurrUser)
+                                {
+                                    <td>
+                                        <a href="/leave/@j.GoingId">Leave</a>
+                                    </td>
+                                }
+                            }
+                        }
+                    }
+                    @{
+                        if (userFound == false) {
+                            <td>
+                                <a href="/join/@i.PlanId">Join</a>
+                            </td>
+
+                        }
+                    }
+                </tr>
+            }
+        </table>
+        <a href="/new"><button class="btn btn-success">Add New Activity</button></a>
+    </div>
+</body>
+</html>
+</body>
+</html>

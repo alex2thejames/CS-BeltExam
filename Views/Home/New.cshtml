@@ -1,0 +1,83 @@
+@using BeltExam.Models
+@model Plan
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        label {
+                color: maroon;
+                font-weight: 700;
+            }
+            button {
+                height: 30px;
+                width: 75;
+                font-weight: 700;
+                color: gray;
+                font-size: 15px;
+                background: blue;
+                box-shadow: 2px 2px;
+            }
+            input {
+                border-radius: 5px;
+                box-shadow: 2px 2px;
+            }
+            .a1 {
+            height: 30px;
+            width: 75px;
+            text-align: center;
+            line-height: 27px;
+            float: right;
+            border-radius: 8px;
+            background: yellow;
+            color: black;
+            text-decoration: none;
+            font-weight: 500;
+            border: 2px solid black;
+            margin-right: 30px;
+            margin-top: 10px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="a1" href="/logout">Log out</a>
+        <a style="background:green" class="a1" href="/home">Home</a>
+        <h1>Dojo Activity Center</h1>
+        <h3>Create an Activity</h3>
+        <form asp-action="AddPlan" asp-controller="Home" method="post">
+                <span asp-validation-for="Title"></span>
+                <label asp-for="Title"></label>
+                <input type="text" name="Title" required><br>
+
+                <span asp-validation-for="Date"></span>
+                <label asp-for="Date"></label>
+                <input type="date" name="Date" required><br>
+
+                <span asp-validation-for="Time"></span>
+                <label asp-for="Time"></label>
+                <input type="time" name="Time" required><br>
+
+                <span asp-validation-for="Duration"></span>
+                <label asp-for="Duration"></label>
+                <input type="number" name="Duration" required>
+
+                <span asp-validation-for="DType"></span>
+                <select name="DType">
+                    <option disabled selected value="">Select</option>
+                    <option value="Minutes">Minutes</option>
+                    <option value="Hours">Hours</option>
+                </select><br>
+
+                <span asp-validation-for="Description"></span>
+                <label asp-for="Description"></label>
+                <input type="text" name="Description" required><br>
+
+                <input type="hidden" name="CreatedBy" value="@ViewBag.CurrUser">
+                
+                <button type="submit">Create Activity</button>
+            </form>
+        </div>
+</body>
+</html>

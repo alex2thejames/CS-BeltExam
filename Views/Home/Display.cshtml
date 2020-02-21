@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Planner</title>
+    <style>
+        .a1 {
+            height: 30px;
+            width: 75px;
+            text-align: center;
+            line-height: 27px;
+            float: right;
+            border-radius: 8px;
+            background: yellow;
+            color: black;
+            text-decoration: none;
+            font-weight: 500;
+            border: 2px solid black;
+            margin-right: 30px;
+            margin-top: 10px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="a1" href="/logout">Log out</a>
+        <a style="background:green" class="a1" href="/home">Home</a>
+        <h1>Dojo Activity Center</h1>
+        <h2>@ViewBag.Plan.Title</h2>
+        <h3>Event Coordinator: @ViewBag.Name.Name</h3>
+        <h3>Description:</h3>
+        <p>@ViewBag.Plan.Description</p>
+        <h3>Participants:</h3>
+        @foreach(var i in @ViewBag.Plan.Goings)
+        {
+            <p>@i.User.Name</p>
+        }
+        @{
+                    bool userFound = false;
+                    @if(@ViewBag.Plan.CreatedBy == @ViewBag.CurrUser)
+                    {
+                        userFound = true;
+                        <a href="/delete/@ViewBag.Plan.PlanId"><button class="btn btn-danger">Delete</button></a>
+                    }
+                    @foreach(var j in @ViewBag.goingList)
+                    {
+                        @if(j.PlanId == @ViewBag.Plan.PlanId)                     
+                        {
+                            @if(j.UserId == @ViewBag.CurrUser)
+                            {
+                                userFound = true;
+                                @if(@ViewBag.Plan.CreatedBy != @ViewBag.CurrUser)
+                                {
+                                        <a href="/leave/@j.GoingId"><button class="btn btn-warning">Leave</button></a>
+                                }
+                            }
+                        }
+                    }
+                        @if (userFound == false) {
+                                <a href="/join/@ViewBag.Plan.PlanId"><button class="btn btn-success">Join</button></a>
+                        }
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+@using BeltExam.Models
+@model User
+<h3>Register</h3>
+    <form asp-action="RegisterProcess" asp-controller="Home" method="post">
+
+            <span asp-validation-for="Name"></span>
+            <label asp-for="Name"></label>
+            <input type="text" name="Name"/><br>
+
+            <span asp-validation-for="Email"></span>
+            <label asp-for="Email"></label>
+            <input type="text" name="Email"/><br>
+
+            <span asp-validation-for="Password"></span>
+            <label asp-for="Password"></label>
+            <input type="password" name="Password"/><br>
+
+            <span asp-validation-for="Confirm"></span>
+            <label asp-for="Confirm"></label>
+            <input type="password" name="Confirm"/><br>
+
+            <button type="submit">Sign up Now</button>
+        </form>

@@ -1,0 +1,33 @@
+﻿@* @using BeltExam.Models *@
+@* @model User *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+            label {
+                color: maroon;
+                font-weight: 700;
+            }
+            button {
+                height: 25px;
+                width: 75;
+                font-weight: 700;
+                color: gray;
+                font-size: 15px;
+                background: blue;
+                box-shadow: 2px 2px;
+            }
+            input {
+                border-radius: 5px;
+                box-shadow: 2px 2px;
+            }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Dojo Activity Center</h1>
+    <partial name="LoginPartial">
+    <partial name="RegisterPartial">
+</body>
+</html>
